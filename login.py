@@ -13,14 +13,14 @@ app.secret_key = os.urandom(24)
 
             if request.form['password'] == 'password':
                 session['user'] = request.form['username']
-                return redirect(url_for('protected'))
+                return redirect(url_for('login'))
 
         return render_template('index.html')
 
 @app.route('/protected')
 def protected():
     if g.user:
-        return render_template('protected.html',user=session['user'])
+        return render_template('login.html',user=session['user'])
     return redirect(url_for('index'))
 
 @app.before_request
