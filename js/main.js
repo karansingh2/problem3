@@ -1,24 +1,26 @@
-const toggle = document.querySelector(".toggle");
-const menu = document.querySelector(".menu");
-const items = document.querySelectorAll(".item");
+const showMenu = (toggleId, navId)=>{
+  const toggle = document.getElementById(toggleId),
+  nav = document.getElementById(navId)
 
-/* Toggle mobile menu */
-function toggleMenu() {
-  if (menu.classList.contains("active")) {
-    menu.classList.remove("active");
-    toggle.querySelector("a").innerHTML = "<i class='fas fa-bars'></i>";
-  } else {
-    menu.classList.add("active");
-    toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
+  if(toggle && nav){
+    toggle.addEventListener('click', ()=>{
+      nav.classList.toggle('show')
+      toggle.classList.toggle('bx-x')
+    })
   }
 }
-/* Event Listeners */
-toggle.addEventListener("click", toggleMenu, false);
-for (let item of items) {
-  if (item.querySelector(".submenu")) {
-    item.addEventListener("click", toggleItem, false);
-  }
-  item.addEventListener("keypress", toggleItem, false);
+showMenu('header-toggle','nav-menu')
+
+/*===== ACTIVE AND REMOVE MENU =====*/
+const navLink = document.querySelectorAll('.nav__link');   
+
+function linkAction(){
+/*Active link*/
+navLink.forEach(n => n.classList.remove('active'));
+this.classList.add('active');
 }
-document.addEventListener("click", closeSubmenu, false);
+navLink.forEach(n => n.addEventListener('click', linkAction));
+
+
+
 
